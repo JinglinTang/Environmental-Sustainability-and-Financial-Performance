@@ -1,0 +1,709 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{lscape}
+\usepackage{fancyhdr}
+\usepackage{natbib}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{siunitx}
+\usepackage{titletoc}
+\usepackage{abstract}
+\usepackage{caption}
+\renewcommand{\abstractnamefont}{\normalfont\Large\bfseries}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[underline=true,rounded corners=false]{pgf-umlsd}
+\definecolor{cor-very-weak}{HTML}{000000}
+\definecolor{cor-weak}{HTML}{EEBD84}
+\definecolor{cor-moderate}{HTML}{F47461}
+\definecolor{cor-strong}{HTML}{CB2F44}
+\definecolor{cor-very-strong}{HTML}{8B0000}
+
+\newcommand{\hcancel}[1]{%
+    \tikz[baseline=(tocancel.base)]{
+        \node[inner sep=0pt,outer sep=0pt] (tocancel) {#1};
+        \draw[line width=0.5mm, black] (tocancel.south west) -- (tocancel.north east);
+    }%
+}%
+
+\geometry{
+    left=2.54cm,
+    right=2.54cm,
+    top=2.54cm,
+    bottom=2.54cm
+}
+\linespread{1.5}
+\title{Balancing Green and Gold: The Impact of Environmental Sustainability on Financial Performance in US Banks}
+\author{Student Number: 5554187}
+\date{}
+\makeatletter
+\let\inserttitle\@title
+\makeatother
+%\usepackage[style=agsm,backend=biber]{biblatex}
+%\addbibresource{export.bib}% Syntax for version >= 1.2
+
+\renewcommand{\headrulewidth}{.4mm} % header line width
+\renewcommand{\footrulewidth}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{20pt}
+\fancyhfoffset[L]{0.2cm} % left extra length
+\fancyhfoffset[R]{0.2cm} % right extra length
+\rhead{5554187}
+\lhead{\bfseries{Environmental Sustainability and Financial Performance of US Banks}}
+\cfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\vspace{0.2in}
+\begin{abstract}
+\normalsize
+This dissertation focuses on the impact of environmental sustainability on US banks' financial performance. The study examines the relationship between banks' environmentally friendly initiatives and key financial metrics, utilizing pooled OLS, fixed effects, and GMM models to ensure robust results. The results reveal nuanced and complex relationships: environmental sustainability lowers short-run profitability metrics such as ROA and ROE. However, it positively influences market valuation as measured by Tobin’s Q. The evidence drawn from these findings suggests that though sustainability efforts are associated with immediate costs and reduce profitability, they improve long-term market valuation while diminishing idiosyncratic risk. This paper contributes to the literature by providing empirical evidence from the US banking sector that addresses the need for banks to strike a balance between short-term financial performance and long-term sustainability goals. It also emphasizes firm-specific characteristics and regulatory context in the estimation of the effects resulting from sustainability practices. \\
+
+\noindent
+\textbf{Keywords:} Environmental Sustainability, Financial Performance, US Banks
+
+\noindent
+\textbf{JEL Classification:} G21, M14, Q56
+\end{abstract}
+\pagenumbering{gobble}
+
+\newpage
+\tableofcontents
+\pagenumbering{gobble}
+
+\newpage
+\clearpage
+\pagenumbering{arabic} 
+\section{Introduction}
+In recent years, the integration of environmental sustainability into business practices has become a critical area of focus for industries worldwide. The banking sector, as a pivotal component of the global economy, plays a crucial role in driving sustainable development. An increasing number of banks are adopting principles of environmental sustainability within their operational frameworks because of growing concerns about climate change and environmental degradation. This response is not only a reaction to regulatory requirements but also a strategic move to boost performance and guarantee profitability in the long term.
+
+The primary reason environmental sustainability factors are crucial for banks is the central role of financial intermediation in the economy. Understanding the influence of environmental sustainability on banks is critical because it sheds more light on a broader range of implications concerning financial stability and economic growth. A growing regulatory emphasis, including that of the Federal Reserve, has been placed on the general operation of banks, particularly related to their risk management and compliance with environmental sustainability practices.
+
+Sustainability opportunities and challenges in the banking sector are unique. As a significant financier for both projects and companies, the lending and investing practices of the banks significantly shape the environmental outcomes of the society. Analysis of sustainability in banks gives insights into their contribution to, or mitigation of, environmental risks. Banks are known to have significant social impacts through their lending practices, community involvement, and customer relations. They manage assets and wealth, making it critical to consider how banks address social matters such as financial inclusion, fair lending, and community development within the broader context of environmental sustainability. Banking is complex and full of risks, thus it must be well managed by governance. Such an understanding can lead to the creation of better regulatory policies on the part of regulators.
+
+Extensive research has explored the relationship between environmental sustainability activities and company performance, with most studies yielding mixed results. On the one hand, a number of these studies show a positive relationship that sustainability activities may result in the improvement of operational efficiencies, enhancement in the corporate reputation, and increase in shareholder value. For example, companies with high-quality environmental practices often experience decreased costs, increased worker productivity, and reduced potential risks. This positive impact is also associated with aligning sustainability-driven innovation strategies with future innovation outcomes, labour productivity, exporting, and survival rates \citep{Cabaleiro2024}. Moreover, \cite{Bauer2014} show that effective corporate environmental management can reduce credit risk, demonstrating the financial advantage of strong environmental practices. On the other hand, other studies suggest a negative relationship where sustainability activities may increase costs and reduce available resources, potentially restricting a firm's financial performance \citep{Hwang2021}. Some researchers have attributed the adverse effects to the huge investment required by the implementation of sustainability initiatives that do not yield financial returns in the short run \citep{Khan2023a}. Additionally, the friction in incorporating sustainable business practices within the existing business model entails operational disruption and additional administrative burden. 
+
+The inconclusive relationship highlights an opportunity for further empirical research. By focusing on the banking sector of the United States, with its distinct background compared to other sectors, in terms of both strict regulation and attention to sustainable finance, the present study aims to fill this gap. 
+
+The United States was chosen as the primary research focus due to its significant influence on the global banking market. While the social and governance systems in the US banking market have been recognized, the environmental aspect can still be developed. Over 4,000 banks and savings institutions in the United States, as of 2023, have been reported by FDIC (\citeyear{FDIC2024}). This substantial number provides a broad and diverse dataset to assess the impact of environmental sustainability on bank performance. Furthermore, the robust regulatory environment in the USA, exemplified by the Dodd-Frank Act and the increasing focus on climate-related financial risks by the Federal Reserve and the SEC, provides a rich context for observing the effects of integrating environmental sustainability into the banking system \citep{Duffie2019}.
+
+The banking sector empirically offers ample data through regulatory filings, financial reports, and sustainability ratings with which in-depth empirical analysis can be undertaken. Key performance indicators, such as Return on Assets (ROA) and Return on Equity (ROE), could be analyzed in light of sustainability practices. In addition, changes in sustainability performance have an impact on market perception towards banks, influencing stock prices as well as market valuation measured by Tobin's Q.
+
+%According to \cite{Azmi2021}, there is little correlation between bank performance and the social and governance parts of ESG. Therefore, this study aims to provide empirical evidence on the impact of environmental sustainability on the performance of US banks. This approach is consistent with the increased emphasis on the environmental dimension of ESG, which is widely seen as a significant driver of value creation and risk mitigation in the banking industry. Standard reporting requirements allow comparability of the effects across institutions. Environmental sustainability risks could impact the risk profile of banks, and those with good practices on sustainability would be beneficially associated with lower regulatory and reputational risks.
+
+A comprehensive dataset from 2013 to 2023 is employed in investigating the relationship between environmental sustainability and the financial performance of all US-listed banks. This dataset integrates panel data from reliable sources, including Compustat, the Kenneth R. French Data Library, and Refinitiv, which collectively provide extensive financial and environmental metrics that are important for our analysis. The selected variables for analysis cover the following dimensions: dependent variables (performance metrics such as Tobin’s Q, ROA, and ROE), explanatory variables (Environmental Score), and control variables.
+
+Our analysis introduces three distinct channels through which environmental sustainability may impact bank performance: valuation, cash flow, and risk. The valuation channel examines the following indicators: cost of equity and debt; the cash flow channel includes indicators such as net income and the net interest margin; and the risk channel consists of the bank's exposure to idiosyncratic and market risks. 
+
+Furthermore, this study employs the Capital Asset Pricing Model (CAPM) to measure and incorporate risk into our analysis. By making use of CAPM, idiosyncratic and market risk can be quantified, which will give an idea of how sustainability initiatives alter the risk profile of banks.
+
+The integration of these three channels represents a novel approach in the context of the banking sector and differentiates the study from previous literature. By combining traditional financial performance metrics with a comprehensive analysis of risk and valuation factors, this research aims to offer a holistic view of the benefits and risks associated with environmental sustainability in banking. This innovative methodology aims to provide robust empirical evidence, hence contributing to the evolving debate on sustainable finance and its consequences for the financial sector.
+
+The pooled OLS and Fixed Effects models provide initial insights and control for time-invariant unobserved heterogeneity, respectively. To enhance the robustness of our findings, we incorporate the Generalized Method of Moments (GMM) model. This technique is particularly effective in handling endogenous explanatory variables and dynamic panel data, incorporating lagged dependent variables to capture the temporal dependencies and dynamic nature of bank performance.
+
+The results show that environmental sustainability practices, initially reduce profitability, as reflected in lower return on assets (ROA) and return on equity (ROE); however, offer significant long-term benefits. Specifically, higher environmental scores correlate with increased market valuations as measured by Tobin’s Q, suggesting that investors reward banks for strong environmental practices.
+
+The study further reveals that environmentally sustainable banks have lower firm-specific risks, despite an increased sensitivity to market-wide shocks. Such banks also benefit from better pricing power and customer loyalty, which is reflected in a positive net interest margin. Additionally, the analysis suggests a complex interaction between environmental sustainability and market share, where banks with superior environmental practices eventually gain competitive advantages.
+
+The study underscores the need for a long-term perspective when evaluating such initiatives. It also emphasizes the importance of considering firm-specific characteristics and addressing potential endogeneity issues to obtain accurate assessments. 
+
+The implications of this research are extensive. In the context where investors are increasingly screening for environmental sustainability factors before making investment decisions, this analysis informs investors about the reflection of these factors in bank performance. The results would also inform the policymakers to formulate regulations that promote sustainable practices among financial institutions. Despite the growing ESG-related literature, studies focusing specifically on environmental sustainability in the banking sector remain limited. The present study bridges the identified gap by offering new insights. Additionally, given the significant role of the US banking sector in global finance, findings from the present study offer a broader perspective on international banking practices.
+
+The strategic emphasis on environmental sustainability by major US banks, such as JPMorgan Chase and Bank of America, highlights the relevance of this study. These institutions have committed substantially to green financing and sustainable projects \citep{JPMC2024, BoA2024}. The study adds to the ongoing debate and opens further paths to understanding financial landscapes in the region. The findings will also help banking practitioners develop appropriate environmental sustainability initiatives to improve performance outcomes.
+
+%Future research could expand on these findings by exploring the causal mechanisms and the impact of specific environmental initiatives.
+
+\newpage
+\section{Literature Review and Hypothesis Development}
+Recent empirical studies have provided insight into the relationship between environmental sustainability, a critical component of ESG, and bank performance. For example, \cite{Chen2022} found that green banking practices positively influence banks' environmental performance and green financing in the context of private commercial banks in Bangladesh. Similarly, \cite{Khan2023b} found green banking practices to positively influence bank reputation and environmental awareness within Islamic banks in Pakistan. These findings suggest that the adoption of green banking initiatives would enhance the reputational capital and operational efficiency, which are important towards the financial performance of the banks. Furthermore, \cite{Gulzar2024} confirm the crucial contribution green banking provides to the environment's sustainability.
+
+The environmental dimension (E) has become one of the most important factors in sustainable banking. Concerning the findings of \cite{Azmi2021}, the social and governance aspects of ESG have little relevance to bank performance. Their findings hence raised the significance of focusing the examination on the banks' environmental sustainability policies and how they directly affect financial results. Thus, the present study takes a focused approach to the environmental aspect of ESG. Similarly, Besides, studies conducted by \cite{Chen2022} provide more evidence in favour of the focus on environmental sustainability, by demonstrating the beneficial impacts of green banking practices on environmental performance and green financing.
+
+In a broader context, \cite{Inacio2022} provide a comprehensive overview of sustainable banking practices, emphasizing their critical role in banking operations. The study by \cite{Care2019} provides preliminary evidence on the value relevance of environmental disclosure, indicating that transparency in environmental practices correlates with financial performance in EU-15 listed banks. This highlights the potential influence of environmental sustainability on market values and investor perceptions of banks.
+
+Adding to this perspective, the impact of environmental reporting on investors' valuation of firms has been explored by recent studies. \cite{Clarkson2008} considered the relationship between environmental performance and disclosure and, using empirical data, proved there to be value to the financial performance of environmental transparency. This is backed up by \cite{Cormier1999}, which studied the strategies of corporate environmental disclosure of a sample of firms and their determinants, costs, and benefits, confirming the relevance and value of environmental reporting for investors. The role of environmental reporting for investors in valuing a firm's earnings was revisited from an international perspective by \cite{Cormier2007}. According to the findings of this study, environmental reporting can significantly affect the relationship between earnings and market value, implying that the financial markets consider this type of disclosure as significant.
+
+Moreover, \cite{Berthelot2012} investigated how investors view the publication of sustainability reports in the Canadian context. Firms publishing such reports are traded at a premium, suggesting that investors place value on companies' commitment to sustainable development and environmental transparency. Further evidence on the information provision role of environmental disclosures for investors has been provided by \cite{Cormier2011}. In this study, the authors emphasize the importance of comprehensive environmental reporting, including information presented in sustainability reports and on company websites, in providing valuable insights to investors.
+
+Additionally, \cite{Erten2024} demonstrate that banks are more likely to incorporate environmental risks into loan pricing when local beliefs about the importance of environmental issues are strong. This suggests that local context plays a critical role in how banks perceive and respond to environmental risks. Moreover, the findings from \cite{Ponce2023} illustrate how the environmental dimension impacts financial metrics such as Return on Assets (ROA), Return on Equity (ROE), and Tobin's Q (TQ), with specific insights applicable to US banks.
+
+The need for standardization in environmental reporting has been raised by \cite{Neu1998}. They argue that the development of standards and an environmental assurance service would provide greater credibility and comparability among corporate environmental reports, and can further improve their usefulness for investors and other stakeholders. Comparative study of \cite{Thistlethwaite2016} in environmental and social disclosures between companies, and across sectors, raise these issues of comparability. Their work highlights the need for proper standardization and comparability of sustainability reports to increase their value for investment decision-making.
+
+%\newpage
+%\section{Hypothesis Development}
+
+The key hypothesis derived from the literature on environmental sustainability and bank performance is that environmental sustainability initiatives positively influence the banks' performance. The hypothesis is derived from the belief that banks engaged in environmentally sustainable activities benefit from improved operational efficiencies, higher reputation, and increased shareholder value, consequently improving their financial performance. Also, banks with strong environmental sustainability policies can reduce costs through increased worker productivity and reduced potential risk, thus translating to better financial outcomes \citep{Menicucci2023}. 
+
+Furthermore, environmental sustainability initiatives can improve values and market performance due to the stabilization of customer base and investor preferences. This hypothesis is consistent with several studies, which indicate a positive relationship between environmental sustainability integration and financial performance, particularly when environmental sustainability initiatives drive value creation \citep{Cabaleiro2024, Bauer2014}. Thus, the hypothesis relating to the proposed study on US banks is as follows:
+
+$\mathbf{H_{1}}$\textbf{: Environmental sustainability initiatives have a positive impact on the financial performance of US banks.}
+
+In \cite{Giese2019}, the authors identify three primary channels: the cash flow channel, the idiosyncratic risk channel, and the valuation channel. We can further derive hypotheses regarding the channels through which environmental sustainability factors affect banks' performance. In the context of the banking industry, these channels can be refined to reflect specific characteristics of banking operations and financial performance.
+
+\subsection{The Cash Flow Channel}
+Environmental sustainability integration may affect banks' cash flows to a large extent. For example, banks with high environmental sustainability performance have the potential to attract more customers who are sensitive to environmental sustainability when making their choices. In addition, such banks might have reduced operating costs through better energy efficiency and reduced regulatory fines related to environmental issues. An enhanced brand reputation also contributes to increased customer loyalty and higher deposit growth. Therefore, we hypothesize that:
+
+$\mathbf{H_{1.1}}$\textbf{: Higher environmental sustainability ratings are associated with higher cash flows (e.g., higher net income and market share) for US banks.}
+\subsection{The Risk Channel}
+Environmental sustainability practices affect the risk of a bank in various ways, one of them being through an improved process of risk management. For example, banks with effective environmental sustainability practices may have reduced credit risk due to their tendency to lend to environmentally responsible companies, which are considered less risky. Besides, such banks will benefit from reduced risks related to more stable operations and reduced legal and regulatory risks. Thus, the hypothesis is:
+
+$\mathbf{H_{1.2}}$\textbf{: Higher environmental sustainability ratings are associated with lower risk (e.g., lower idiosyncratic risk and exposure to market risk) for US banks.}
+\subsection{The Valuation Channel}
+The elements of environmental sustainability can affect the valuation of a bank through its cost of capital. A bank with strong environmental sustainability practices may be perceived as less vulnerable to environmental regulatory changes and market shocks, leading to a lower risk exposure level. This will then translate to a lower cost of equity and debt, consequently enhancing the bank's valuation. As a result, we propose that:
+
+$\mathbf{H_{1.3}}$\textbf{: Higher environmental sustainability ratings are associated with lower cost of capital (e.g., lower cost of debt and cost of equity) for US banks.}\\
+
+These hypotheses will be tested empirically to establish the specific influence of environmental sustainability on bank performance using financial data from US banks. They will help in understanding how the impact of environmental sustainability initiatives is translated into financial metrics and firm value within the context of the US banking sector. 
+
+\newpage
+\section{Data}
+This chapter presents data sources and the variables that are used in the study. This study employs panel data to assess how environmental sustainability (ES) can help influence the performance of banks in the United States. For this research, the major data sources are Compustat (\citeyear{Compustat2024}), Kenneth R. French Data Library (\citeyear{French2024}), and Refinitiv (\citeyear{Refinitiv2024}). These sources are well-known for establishing broad and consistent financial and environmental data needed for a deep view of the banking sector. Based on data availability, the period selected for the analysis is 2013-2023. The Compustat data focuses only on those banks identified using selected Standard Industrial Classification (SIC) codes 6020, 6021, 6022, 6029, 6035, and 6036, which represent various types of commercial and savings institutions. For example, Goldman Sachs is excluded from the sample because of the criteria \citep{Compustat2024}. 
+
+Table \ref{table:1} provides the definitions of sample variables. The variables are categorized into dependent (performance variable, valuation channel, cash flow channel, and risk channel), primary explanatory, and control variables. Each variable is selected based on its ability to measure the bank's performance concerning ES initiatives, which is the central objective of this study. Table \ref{table:2} provides the descriptive statistics for the variables. 
+
+The Environmental Pillar Score from Refinitiv ESG (\citeyear{Refinitiv2024}) estimates the environmental performance of banks and their attempts to deal with environmental impacts. This variable is chosen as the primary explanatory variable in examining the relationship between the ES initiatives and financial performance. 
+
+The independent variables should accurately reflect the banks' performance during the estimation process. Tobin’s Q, Return on Assets (ROA) and Return on Equity (ROE) are frequently used for covering market valuation and profitability; therefore, they provide perspectives on banks' financial performance \citep{Fernandes2018, Nsour2021}. Tobin’s Q measures a bank's market valuation relative to assets. It shows the competence of bank management in using its assets to generate a market value. Tobin's Q shows the present value of predicted future economic benefits. A higher Tobin's Q indicates better performance and investor confidence, making it an important parameter for this research \citep{Copeland1988}. ROA is a crucial indicator of the bank's profitability and efficiency in managing its assets. It helps one understand how well the bank converts its assets into net earnings. ROE is a measure of profitability relative to the equity held by shareholders. It is an important index of financial performance and helps to assess the effectiveness of the bank in using its equity for profit maximization \citep{Klaassen2015}.
+
+The cost of equity within the Valuation Channel represents the return that is required by shareholders to invest in the bank. It is important to understand how far-reaching the impacts of ES will eventually be in terms of affecting the perceived risk and return profile of the bank. The cost of debt represents the effective rate banks would pay on their borrowed funds. This is important for reviewing ES initiatives and their impact on the overall net borrowing costs and financial health \citep{Beltrame2018}.
+
+In the Cash Flow Channel, Net Income is chosen because it is a metric of the bank's capacity to generate cash from operating activities that maintain liquidity and fund sustainable initiatives. It provides insights into the operational efficiency and financial stability of the bank \citep{Zouaoui2023}. The Net Interest Margin indicates the difference between the interest income earned by the bank and the interest expenses paid. This is crucial for understanding the influences that ES practices have on the core revenue generation activities of the bank \citep{Hughes2019}. Market Share illustrates the bank's competitive position and its growth potential within the industry. This portends whether the bank will continue to attract and retain customers with ES practices, thereby affecting revenue and growth \citep{Berger2009}.
+
+We computed the idiosyncratic risk and market risk for the Risk Channel using the Capital Asset Pricing Model (CAPM). The CAPM is a fundamental model of finance that defines the link between systematic risk and expected return for assets, particularly stocks. It estimates the expected return on an asset given its beta, which is its exposure to systematic risk, and the expected market return \citep{Fama2004}. Formally, the CAPM equation is written as $E(R_i) = R_f + \beta_i (E(R_m) - R_f) + \epsilon_i$, where $E(R_i)$ is the expected return on the asset, $R_f$ is the risk-free rate, $\beta$ is the asset's beta, $E(R_m)$ is the expected return of the market, and $\epsilon_i$ stands for an error term. Idiosyncratic Risk measures the bank-specific risk that is not explained by market movements. It helps assess the effect of the ES initiatives on the bank's distinct risk profile. Market Risk is the risk that comes with the entire market movement, and it is represented by the beta coefficient under the CAPM. It reflects the response of the stock to the movements in the overall market and will give an impression of how ES initiatives can change the degree of exposure to systemic risk of the bank.
+
+Bank-specific control variables such as Capitalization, Efficiency and Liquidity, account for credit risk and stability in operations, which are major concerns for the regulators and investors \citep{Chaarani2023, Velliscig2023}. Capitalization is an indicator of a bank's financial strength and its ability to absorb losses. This variable is included to control for the impact of financial strength on performance metrics. Liquidity measures the bank's ability to meet its short-term obligations and is critical for ensuring operational efficiency and financial stability. Efficiency evaluates a bank’s ability to control its operating expenses relative to its income. 
+
+The selection of these variables is based on a search for a detailed analysis of the effects of environmental sustainability on the performance of US banks. The present paper encompasses a broad array of financial and sustainability indicators that will provide robust empirical support for assessing the benefits and challenges of implementing an environmental sustainability initiative in banking.
+
+%\begin{landscape}
+%\begin{table}[h]
+%\centering
+%\caption{Description of Variables. This table provides the definitions of sample variables.}
+%\begin{tabular}{llr}
+%\toprule
+%\textbf{Variable} & \textbf{Description} & \textbf{Source} \\
+%\midrule
+%\multicolumn{3}{c}{\textbf{Dependent Variables}} \\
+%\textbf{Performance Variables} & & \\
+%Tobin’s Q & Book value of total assets minus the book value of common equity plus market value of common equity / book value of total assets & Compustat (2024) \\
+%Return on assets (ROA) & Net income/total assets & Compustat (2024) \\
+%Return on equity (ROE) & Net income/shareholders’ equity & Compustat (2024) \\
+%\textbf{Valuation Channel Variables} & & \\
+%Cost of capital & Weighted average cost of capital & Compustat (2024) \\
+%Cost of debt & (Interest payments/total interest-bearing debt)*(1-marginal tax) & Compustat (2024) \\
+%\textbf{Cash Flow Channel Variables} & & \\
+%Cash flow & Net income before extraordinary item plus depreciation and amortization expenses plus R\&D expenses/total assets & Compustat (2024) \\
+%Net interest margin & Net interest income/average earning assets & Compustat (2024) \\
+%\textbf{Idiosyncratic Risk Channel Variables} & & \\
+%Idiosyncratic risk indicator & Standard deviation of residuals from CAPM based on daily stock returns & Kenneth R. French Data Library (2024) \\
+%\multicolumn{3}{c}{\textbf{Primary Explanatory Variable}} \\
+%Environmental Pillar Score & Based on three categories: Emissions, Resource use, and Innovation & Refinitiv ESG (2024) \\
+%\multicolumn{3}{c}{\textbf{Control Variables}} \\
+%\textbf{Bank-level Variables} & & \\
+%Capitalization & Total equity/total assets & Compustat (2024) \\
+%Liquidity & Total deposit/total assets & Compustat (2024) \\
+%Efficiency & Cost/total income & Compustat (2024) \\
+%Asset Quality & Non-performing loans/total loans & Compustat (2024) \\
+%\textbf{Macro-level Variables} & & \\
+%GDP growth & Percentage change in total real GDP & World Bank WDI (2024) \\
+%Property rights & Heritage Foundation property rights protection index. A higher value signifies greater protection & Heritage Foundation (2024) \\
+%Bank concentration & Assets of three largest commercial banks as a share of total commercial banking assets & World Bank Global Financial Development (2022) \\
+%\bottomrule
+%\end{tabular}
+%\end{table}
+%\end{landscape}
+
+\begin{table}[H]
+\centering
+\caption{Description of Variables. This table provides the definitions of sample variables.}
+\label{table:1}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{p{4.7cm} p{7.7cm} p{3.8cm}}
+\toprule
+\textbf{Variable} & \textbf{Description} & \textbf{Source} \\
+\toprule
+\multicolumn{3}{c}{\textbf{Dependent Variables}} \\
+\cline{1-3}
+\multicolumn{3}{l}{\textbf{Performance Variables}} \\
+\multirow{3}{*}{Tobin's Q} & (Book value of total assets-Book value of& \multirow{5}{*}{\cite{Compustat2024}}\\
+        & common equity+Market value of common\\
+        & equity)/Book value of total assets\\
+Return on assets (ROA) & Net income/total assets & \\
+Return on equity (ROE) & Net income/shareholders' equity & \\
+\cline{1-3}
+\multicolumn{3}{l}{\textbf{Valuation Channel Variables}} \\
+\multirow{2}{*}{Cost of equity} & Risk-free rate of return+Beta*(Market & \multirow{2}{*}{\shortstack[l]{Kenneth R. French \\ Data Library (\citeyear{French2024})}} \\
+ &  rate of return-Risk-free rate of return) & \\
+\multirow{2}{*}{Cost of debt} & (Interest payments/total interest- & \multirow{2}{*}{\cite{Compustat2024}} \\
+             & bearing debt)*(1-marginal tax) \\
+\cline{1-3}
+\multicolumn{3}{l}{\textbf{Cash Flow Channel Variables}} \\
+\multirow{2}{*}{Net Income} & Net income before extraordinary item+  & \multirow{5}{*}{\cite{Compustat2024}} \\
+         & depreciation and amortization expenses \\
+%         & R\&D expenses)/Total assets  \\
+Net interest margin & Net interest income/average earning assets &\\
+\multirow{2}{*}{Market share} & Total deposit of the bank/Total deposit of all banks  &\\
+\cline{1-3}
+\multicolumn{3}{l}{\textbf{Risk Channel Variables}} \\
+\multirow{2}{*}{Idiosyncratic Risk} & Standard deviation of residuals from CAPM  & \multirow{4}{*}{\shortstack[l]{Kenneth R. French \\ Data Library (\citeyear{French2024})}}\\
+                             & based on daily stock returns & \\
+\multirow{2}{*}{Market Risk (Beta)} & Coefficient from CAPM based on daily stock & \\
+                             & returns  & \\
+\cline{1-3}
+\multicolumn{3}{c}{\textbf{Primary Explanatory Variable}} \\
+\cline{1-3}
+%ESG Score & Single rating combining environmental, social, and governance factors.  & \cite{Refinitiv2024} \\
+Environmental Sustainability Score (E) & Measures a bank's impact across resource use, emissions, and innovation & \multirow{2}{*}{\cite{Refinitiv2024}} \\
+%Social Pillar Score (S) & Measures a company's performance on social responsibility aspects  & \cite{Refinitiv2024} \\
+%Governance Pillar Score (G) & Measures a company's adherence to ethical leadership and transparency practices & \cite{Refinitiv2024} \\
+\cline{1-3}
+\multicolumn{3}{c}{\textbf{Control Variables}} \\
+\cline{1-3}
+\multicolumn{3}{l}{\textbf{Bank-level Variables}} \\
+Capitalization & Total equity/total assets & \multirow{3}{*}{\cite{Compustat2024}}  \\
+Liquidity & Total deposit/total assets &  \\
+Efficiency & Cost/total income & \\
+%Asset Quality & Non-performing loans/total loans & \cite{Compustat2024} \\
+%\multicolumn{3}{l}{\textbf{Macro-level Variables}} \\
+%GDP growth & Percentage change in total real GDP & World Bank WDI\\
+%                 & & (\citeyear{WB2024})\\
+%Property rights & Heritage Foundation property rights & The Heritage\\
+%                 & protection index. A higher value signifies & Foundation (\citeyear{HF2024}) \\
+%                 & greater protection  \\
+%Bank concentration & Assets of three largest commercial banks & World Bank\\
+%                   & as a share of total commercial banking & Global Financial\\
+%                   & assets & Development (\citeyear{WB2022})\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\caption{Descriptive Statistics. This table provides the descriptive statistics for the variables used in the analysis. For each variable, the table reports the mean, standard deviation, minimum, first quartile, median, third quartile, maximum, and the number of observations.}
+\label{table:2}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{lcccccccc}
+\toprule
+\multicolumn{1}{l}{\textbf{Variable}} &\multicolumn{1}{c}{\textbf{Mean}} &\multicolumn{1}{c}{\textbf{Std.Dev}} &\multicolumn{1}{c}{\textbf{Min}} &\multicolumn{1}{c}{\textbf{Q1}} &\multicolumn{1}{c}{\textbf{Median}} &\multicolumn{1}{c}{\textbf{Q3}} &\multicolumn{1}{c}{\textbf{Max}} &\multicolumn{1}{c}{\textbf{Obs.}} \\
+\toprule
+Tobin's Q  & 1.0252 & 0.0620 & 0.4648 & 0.9976 & 1.0199 & 1.0505 & 1.7214 & 3926 \\
+ROA  & 0.0089 & 0.0066 & -0.0826 & 0.0066 & 0.0091 & 0.0116 & 0.1110 & 3930 \\
+ROE  & 0.0911 & 0.5251 & -1.5548 & 0.0595 & 0.0853 & 0.1091 & 32.7546 & 3930 \\
+Cost of equity & 0.1537 & 0.1800 & -0.5189 & 0.0083 & 0.1205 & 0.2925 & 1.1966 & 3930 \\
+Cost of debt & 7.0018 & 147.8695 & 0.0000 & 0.0474 & 0.0939 & 0.2419 & 6631.43 & 3484 \\
+Net Income & 287.29 & 2315.22 & -1835.02 & 9.7250 & 28.343 & 94.531 & 57064.0 & 3601 \\
+Net interest margin & 3.4652  & 0.6973 & 0.7400 & 3.1200 & 3.4400 & 3.7900 & 15.1000 & 3906 \\
+Market share & 0.0028 & 0.0168 & 0.0000 & 0.0001 & 0.0003 & 0.0010 & 0.2631 & 3930\\
+Stock price volatility & 1.7945 & 1.1158 & 0.5631 & 1.2226 & 1.5130 & 1.9942 & 22.4495 & 3930 \\
+Environmental Sustainability Score (E) & 0.1252 & 0.1808 & 0.0000 & 0.0000 & 0.0296 & 0.2115 & 0.9492 & 2235 \\
+Capitalization & 0.1123 & 0.0365 & -0.0017 & 0.0925 & 0.1070 & 0.1251 & 0.8537 & 3930 \\
+Liquidity & 0.7917 & 0.0838 & 0.0000 & 0.7603 & 0.8052 & 0.8424 & 0.9515 & 3930 \\
+Efficiency & 3.6208 & 34.681 & -1624.75 & 2.4684 & 3.4703 & 4.9795 & 936.76 & 3930 \\
+\bottomrule
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\end{table}
+\end{landscape}
+
+\newpage
+\section{Methodology}
+This study employs a comprehensive quantitative approach that seeks to investigate the influence of environmental sustainability on the financial performance of banks in the United States. The methodology adopted consists of three stages: the first stage, combined correlation matrix and pooled ordinary least square (OLS) analysis; the second stage, Fixed Effects modelling; and the third stage, Generalized Method of Moments (GMM) modelling. Each stage is designed to address different aspects of the relationship between environmental sustainability and bank performance, while also tackling potential endogeneity issues.
+
+\subsection{Correlation Matrix and Pooled Ordinary Least Squares (OLS)}
+The first step is building a correlation matrix and employing the pooled OLS method between the main financial performance metrics (e.g., ROA, ROE), environmental sustainability (E), and other control variables concerning the bank size, market conditions, and managerial practices. The correlation matrix helps identify preliminary associations and potential endogeneity problems. For example, correlations between financial indicators and environmental sustainability could be influenced by omitted variables not considered in the model, such as bank size or market conditions. Measurement inaccuracies in variables, such as financial performance metrics, would also generate endogeneity and distort the reliability of the results \citep{Tumminello2010}. 
+
+The Pooled OLS method yields baseline estimates by combining cross-sectional and time series data, treating all observations as a single dataset without accounting for individual bank characteristics. While this method is intuitive and provides initial insights, it may be affected by endogeneity issues due to omitted variable bias and measurement errors. The pooled OLS approach takes no account of unobserved heterogeneity, probably resulting in inconsistent parameter estimation. Despite these limitations, this combined approach is a useful starting point for understanding the general trends and relationships in the data \citep{Adekeye2021}.
+
+\subsection{Fixed Effects Model}
+To address the inconsistency issues arising from the pooled OLS approach in handling unobserved heterogeneity, this study employs the fixed effects model. This model allows for the fact that unobserved time-invariant heterogeneity between banks is controlled by allowing each bank to have its unique intercept. This addresses the omitted variable bias related to unobserved characteristics that do not change over time. The fixed effects model focuses on within-bank variation. As a result, it can afford to provide more reliable estimates. However, the static nature of the model means it cannot have lagged values of the dependent variable included in the specification \citep{Wooldridge2010}.
+
+\subsection{Generalized Method of Moments (GMM)}
+The final step is to rectify the potential endogeneity issues more stringently, using the Generalized Method of Moments (GMM). In the presence of endogenous explanatory variables, which are correlated with the error term, GMM is the most appropriate approach to handle this issue. This technique uses instrumental variables that are correlated with the endogenous variables but uncorrelated with the error term to obtain consistent parameter estimates. The GMM method is also advantageous in a dynamic panel data model in which lagged dependent variables are considered predictors \citep{Baum2003}. The inclusion of lagged dependent makes the GMM model capable of capturing the dynamic of bank performance in accounting for past financial outcomes to explain current performance. Thus, it enables the model to understand the direct and indirect effects of environmental sustainability on bank performance by using old information. Thus, the study is designed to ensure a comprehensive and robust analysis by adopting these three stages, comprising correlation matrix and pooled OLS, fixed effects, and GMM.
+
+\subsection{Model Specification}
+
+The relationship will be estimated using two regression models. The model \ref{eq:1} will analyse the direct impact of Environmental Sustainability on banks' financial and market performance. The model \ref{eq:2} will explore the channels through which Environmental Sustainability influences performance.
+\begin{equation}
+\begin{aligned}
+    Performance_{i,t} &= \alpha + \beta_1 \cdot Performance_{i,t-1} + \beta_2 \cdot E_{i,t} + \beta_3 \cdot E_{i,t}^2 + \mathbf{X}_{i,t} \delta + u_{i,t}
+\end{aligned}
+\tag{1}
+\label{eq:1}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+    ChannelVariable_{i,t} &= \alpha + \beta_1 \cdot ChannelVariable_{i,t-1} + \beta_2 \cdot E_{i,t} + \beta_3 \cdot E_{i,t}^2 + \mathbf{X}_{i,t} \delta + u_{i,t}
+\end{aligned}
+\tag{2}
+\label{eq:2}
+\end{equation}
+where $Performance_{i,t}$ and $ChannelVariable_{i,t}$ are the dependent variables representing the performance and channel-specific variables for bank $i$ at time $t$, respectively; $E_{i,t}$ is the environmental pillar score for bank $i$ at time $t$, and $E_{i,t}^2$ is the squared term to capture any non-linear effects; $\mathbf{X}_{i,t}$ is a vector of control variables that may affect bank performance, including capitalization, liquidity, and efficiency; $\alpha$, $\beta_1$, $\beta_2$, $\beta_3$, and $\delta$ are the coefficients to be estimated; and $u_{i,t}$ is the error term.
+
+\newpage
+\section{Results}
+The correlation matrix in Table \ref{table:3} provides critical insight into the firm characteristics and the environmental sustainability scores between different firms within the banking sector. 
+
+A key observation from the matrix is where the firm size correlates with the environmental scores. Larger firms tend to have better environmental scores, as evidenced by the positive correlation between the environmental pillar score (E) and market share (0.52). This means that bigger banks are likely to pay more attention to environmentally sustainable practices, presumably due to bigger resource endowments and more extensive regulatory scrutiny. This relationship evidences a potential endogeneity problem since firm size, a determinant of environmental performance, may also affect other financial metrics.
+
+On the other hand, the environmental pillar score (E) presents a significant and negative correlation with liquidity (-0.20) and a slightly negative correlation with capitalization (-0.06). The results thus indicate that the banks with higher environmental scores tend to be less liquid and less capitalized. This counter-intuitive result may signal that banks with better liquidity and capitalization prioritize traditional financial performance over environmental sustainability initiatives, perhaps due to differences in resource allocation or strategic focus. Alternatively, this could result from higher operational costs and investments related to implementing effective environmental measures. The correlation results highlight the need for firm-level characteristics controlled in regressions, as the endogeneity can confound the analysis, potentially leading to biased and inconsistent estimates. 
+
+We also used the correlation matrix to check for multi-collinearity issues among the independent and control variables. When checking the calculated correlation coefficients between the independent variables, the correlations are close to zero. This result indicates that multi-collinearity would not be a severe problem in terms of independent variables for the multivariate analysis. 
+
+The regression outputs, as shown in Table \ref{table:4}, indicate that environmental sustainability (E) is highly significantly negatively related to ROA and ROE in all three models. Specifically, the coefficient for environmental sustainability is found to be negative and significant at the 1\% level for ROA and ROE. For ROA, the coefficient in the pooled OLS  and fixed effects models for environmental sustainability is -0.0059, and in the GMM model is -0.0060. The regressions for ROE produced an environmental sustainability coefficient of -0.0511 in the pooled OLS model, -0.0448 in the fixed effects model, and -0.0451 in the GMM model. These results suggest an inverse relationship with increased environmental scores correlating with decreased ROA/ROE values.
+
+In contrast, when examining Tobin's Q, which measures market valuation, the results differ. The E scores are positively correlated with Tobin’s Q in all three models, with significance at the 1\% level. The coefficient of environmental sustainability in the pooled OLS model is 0.1714. In the fixed effects model, it is 0.2300, whereas in the GMM model, it is 0.1952. This means that banks with higher environmental scores have better market valuations, an implication being that the market rewards banks with good environmental sustainability practices. 
+
+Our study's regression analysis of channel variables provides insights into the impact of environmental sustainability on various financial metrics. The channel variables are divided into three categories: valuation, cash flow, and risk. 
+
+In the valuation channel, which includes the cost of equity and cost of debt, the findings reveal interesting mixed results. For the cost of equity, environmental sustainability demonstrates a positive and significant effect, with a coefficient of 0.3164 in the pooled OLS model (significant at the 1\% level) and 0.2658 in the fixed effects model (significant at the 1\% level). As for E\textsuperscript{2}, it has a negative coefficient, indicating a diminishing return on higher environmental scores. This pattern remains in the GMM model. The E coefficient is positive and significant at the 1\% level, and the E\textsuperscript{2} coefficient is negative and significant at the 10\% level. For the cost of debt, the results remain consistent across models, proving that better environmental scores are related to a lower cost of debt. The coefficient for E is -3.5356 in the pooled OLS model, -3.5488 in the fixed effects model, and -3.9945 in the GMM model (all significant at the 1\% level), while the coefficient for E\textsuperscript{2} is positive, indicating a nonlinear relationship.
+
+In the cash flow channel, which includes net income, net interest margin, and market share, the relationships are more complex. For net income, the pooled OLS model reports a positive E coefficient, significant at 1\% level, and the fixed effects model reports a negative coefficient, therefore pointing out that when firm-specific characteristics are controlled, the positive effect disappears. However, no significant effect of E has been indicated by the GMM model. Net interest margin shows a positive relationship with E across all models, with the coefficient for E being 0.5222 in the pooled OLS model (significant at the 10\% level), 0.6610 in the fixed effects model (significant at the 1\% level), and 0.3098 in the GMM model (significant at the 1\% level).  For market share, E has a negative coefficient in the pooled OLS and fixed effects models (significant at the 5\% level), while E\textsuperscript{2} is positive, suggesting a positive effect at higher levels of environmental scores. The GMM model corroborates these findings, showing significant coefficients for both E and E\textsuperscript{2}.
+
+In the risk channel, which includes idiosyncratic risk and systematic risk, the results indicate that significant relationships with environmental sustainability exist. The coefficient of environmental scores for the idiosyncratic risk is negative and significant across all models: -1.8149 in the pooled OLS model, -1.8886 in the fixed effects model, and -1.6871 in the GMM model (all significant at the 1\% level). This suggests that higher environmental scores reduce idiosyncratic risk. For the systematic risk, in all models, E has a positive coefficient, indicating that higher environmental scores are associated with higher systematic risk. The coefficients are 2.1499 in the pooled OLS model, 1.4841 in the fixed effects model, and 2.2837 in the GMM model, all significant at the level of 1\%.
+
+The results from the regression accentuate the complex and nonlinear relationship between environmental sustainability and many of the financial performance and risk measures. These results highlight that firm-specific characteristics and endogeneity issues should be considered when assessing the effect on bank performance of environmental sustainability. Channel variables under the valuation perspective disclosed a higher score being associated with lower debt costs but a higher cost of equity. The cash flow channel variables have mixed effects on net income while they are found to positively affect the net interest margin and have a negative relationship with market share. The risk channel variables suggest that higher environmental scores reduce idiosyncratic risk but increase the bank's exposure to systematic risk.
+
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\caption{Correlation Matrix. This table reports the Pearson correlation coefficients. ***indicates significance at the 0.01 level; **indicates significance at the 0.05 level; *indicates significance at the 0.10 level.}
+\label{table:3}
+\renewcommand{\arraystretch}{1.6}
+\resizebox{\linewidth}{!}{
+\begin{tabular}{cccccccccccccccc}
+\toprule
+& \textbf{ROA} & \textbf{ROE} & \textbf{Tobin's Q} & \textbf{NI} & \textbf{CE} & \textbf{Idio.Risk} & \textbf{Beta} & \textbf{NIM} & \textbf{CD} & \textbf{E} & \textbf{E\textsuperscript{2}} & \textbf{Cap.} & \textbf{Liqui.} & \textbf{Effi.} & \textbf{Mkt.Share}\\ \toprule
+\textbf{ROA} & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.05***} & \textcolor{cor-weak}{0.21***} & \textcolor{cor-very-weak}{0.06***} & \textcolor{cor-very-weak}{0.04***} & \textcolor{cor-very-weak}{-0.16***} & \textcolor{cor-very-weak}{0.11***} & \textcolor{cor-weak}{0.31***} & \textcolor{cor-very-weak}{0.02} & \textcolor{cor-very-weak}{-0.06***} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{0.18***} & \textcolor{cor-very-weak}{0.09***} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{0.04**}\\ 
+\textbf{ROE} &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{0.05***} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{0.0} & \textcolor{cor-very-weak}{0.03*} & \textcolor{cor-very-weak}{0.0} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{0.0} & \textcolor{cor-very-weak}{-0.03} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{-0.07***} & \textcolor{cor-very-weak}{0.03*} & \textcolor{cor-very-weak}{-0.0} & \textcolor{cor-very-weak}{0.0}\\ 
+\textbf{Tobin's Q} &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{0.03**} & \textcolor{cor-very-weak}{0.16***} & \textcolor{cor-very-weak}{-0.16***} & \textcolor{cor-weak}{0.3***} & \textcolor{cor-very-weak}{0.09***} & \textcolor{cor-very-weak}{0.02} & \textcolor{cor-very-weak}{0.12***} & \textcolor{cor-very-weak}{0.03} & \textcolor{cor-very-weak}{-0.11***} & \textcolor{cor-very-weak}{0.06***} & \textcolor{cor-very-weak}{-0.05***} & \textcolor{cor-very-weak}{0.03*}\\
+\textbf{NI} &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{0.03*} & \textcolor{cor-very-weak}{-0.06***} & \textcolor{cor-very-weak}{0.08***} & \textcolor{cor-very-weak}{-0.13***} & \textcolor{cor-very-weak}{-0.0} & \textcolor{cor-moderate}{0.42***} & \textcolor{cor-moderate}{0.52***} & \textcolor{cor-very-weak}{-0.04**} & \textcolor{cor-very-weak}{-0.14***} & \textcolor{cor-very-weak}{-0.0} & \textcolor{cor-very-strong}{0.96***}\\
+\textbf{CE} &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{0.17***} & \textcolor{cor-strong}{0.76***} & \textcolor{cor-very-weak}{-0.04**} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{0.11***} & \textcolor{cor-very-weak}{0.07***} & \textcolor{cor-very-weak}{-0.0} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{0.05***}\\
+\textbf{Idio.Risk} &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{0.05***} & \textcolor{cor-very-weak}{-0.04**} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{-0.2***} & \textcolor{cor-very-weak}{-0.14***} & \textcolor{cor-very-weak}{-0.17***} & \textcolor{cor-very-weak}{0.06***} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{-0.07***}\\
+\textbf{Beta} &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.03**} & \textcolor{cor-very-weak}{0.02} & \textcolor{cor-weak}{0.33***} & \textcolor{cor-weak}{0.21***} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{-0.04**} & \textcolor{cor-very-weak}{-0.03**} & \textcolor{cor-very-weak}{0.11***}\\
+\textbf{NIM} &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.01} & \textcolor{cor-very-weak}{-0.27***} & \textcolor{cor-very-weak}{-0.32***} & \textcolor{cor-very-weak}{0.19***} & \textcolor{cor-weak}{0.2***} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{-0.16***}\\
+\textbf{CD} &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{-0.02} & \textcolor{cor-very-weak}{0.01} & \textcolor{cor-very-weak}{0.03*} & \textcolor{cor-very-weak}{-0.0} & \textcolor{cor-very-weak}{-0.0}\\
+\textbf{E} &  &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-strong}{0.92***} & \textcolor{cor-very-weak}{-0.06***} & \textcolor{cor-very-weak}{-0.2***} & \textcolor{cor-very-weak}{-0.01} & \textcolor{cor-moderate}{0.52***}\\
+\textbf{E\textsuperscript{2}} &  &  &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.08***} & \textcolor{cor-very-weak}{-0.17***} & \textcolor{cor-very-weak}{-0.0} & \textcolor{cor-strong}{0.62***}\\
+\textbf{Cap.} &  &  &  &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.39***} & \textcolor{cor-very-weak}{0.02} & \textcolor{cor-very-weak}{-0.04**}\\
+\textbf{Liqui.} &  &  &  &  &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.01} & \textcolor{cor-very-weak}{-0.15***}\\ 
+\textbf{Effi.} &  &  &  &  &  &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0} & \textcolor{cor-very-weak}{-0.0}\\
+\textbf{Mkt.Share} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \textcolor{cor-very-strong}{1.0}\\ \bottomrule
+\end{tabular}}
+\caption*{NI: Net Income; CE: Cost of Equity; Idio. Risk: Idiosyncratic Risk; NIM: Net Interest Margin; CD: Cost of Debt; E: Environmental Sustainability Score; Cap.: Capitalization; Liqui.: Liquidity; Effi.: Efficiency; Mkt. Share: Market Share.}
+\renewcommand{\arraystretch}{1}
+\end{table}
+\end{landscape}
+
+
+\newpage
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\caption{Regression Results. The table presents the results of all models. ***indicates significance at the 0.01 level; **indicates significance at the 0.05 level; *indicates significance at the 0.10 level. Robust standard errors are presented in the SE columns. For pooled OLS and Fixed Effects models, R-squared, Adjusted R-squared and F-statistic are reported; for GMM models, AR(1), AR(2) and Wald test are reported. 
+}
+\label{table:4}
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.3]cc@{}S[table-format = 1.3]cc@{}S[table-format = 1.3]@{}S[table-format = 1.3]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{ROA}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & -0.005*** & 0.001 & -6.100 & -0.005*** & 0.000 & -7.009 & -0.006*** & 0.001 & -5.861 \\
+$E^2$ &  0.007*** & 0.001 & 5.782 & 0.005*** & 0.001 & 3.079 & 0.009*** & 0.001 & 5.022 \\
+Lagged & & & & & & & 0.047** & 0.022 & 2.146 \\
+Capitalization & 0.015*** & 0.005 & 2.716 & 0.024*** & 0.004 & 4.970 & 0.039*** &  0.005 & 7.371 \\
+Liquidity & -0.000 & 0.002 & -0.150 & -0.004 & 0.003 & -1.122 & 0.013*** & 0.000 &  17.096 \\
+ln(Efficiency) & -0.005*** & 0.000 & -30.913 & -0.005*** & 0.000 & -20.918 & -0.004*** & 0.000 & -23.278 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2203} &\multicolumn{3}{c}{2203}& \multicolumn{3}{c}{3902} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.60} &\multicolumn{3}{c}{0.64}& \multicolumn{3}{c}{-2.74} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.60} &\multicolumn{3}{c}{0.58}& \multicolumn{3}{c}{-4.52} \\
+F-statistic/Wald test& \multicolumn{3}{c}{674.33} &\multicolumn{3}{c}{687.68}& \multicolumn{3}{c}{8444.12} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\vspace{0.4cm}
+
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{ROE}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & -0.05*** & 0.00 & -5.73 & -0.04*** & 0.00 & -5.59 & -0.04*** & 0.01 & -3.70 \\
+$E^2$ &  0.06*** & 0.01 & 5.41 & 0.03* & 0.01 & 1.90 & 0.08*** & 0.02 & 3.35 \\
+Lagged & & & & & & & 0.05 & 0.03 & 1.56 \\
+Capitalization & -0.70***&0.05&-13.92 & -0.66***&0.05&-11.41 & -0.25*** & 0.06 & -3.93\\
+Liquidity & -0.00 & 0.02 & -0.16 & -0.04 & 0.03 & -1.05 & 0.20 & 0.01 & 18.91 \\
+ln(Efficiency) & -0.05*** & 0.00 & -29.64 & -0.05***& 0.00 & -21.46 & -0.03***& 0.00 & -17.46 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2203} &\multicolumn{3}{c}{2203}& \multicolumn{3}{c}{3902} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.64} &\multicolumn{3}{c}{0.66}& \multicolumn{3}{c}{-3.87} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.64} &\multicolumn{3}{c}{0.60}& \multicolumn{3}{c}{-5.98} \\
+F-statistic/Wald test& \multicolumn{3}{c}{812.18} &\multicolumn{3}{c}{748.35}& \multicolumn{3}{c}{7022.19} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+\end{landscape}
+
+\newpage
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{Tobin's Q}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & 0.17*** & 0.02 & 7.91 & 0.23*** & 0.01 & 13.53 & 0.19*** & 0.02 & 6.66 \\
+$E^2$ &  -0.21*** & 0.03 & -6.93 & -0.23*** & 0.03 & -6.49 & -0.19*** & 0.05 & -3.24 \\
+Lagged & & & & & & & 0.04** & 0.02 & 2.14 \\
+Capitalization & -0.17** & 0.08 & -1.98 & 0.08 & 0.09 & 0.93 & 0.60*** & 0.05 & 10.73 \\
+Liquidity & -0.00 & 0.03 & -0.13 & -0.07*** & 0.02 & -2.63 & 0.60*** & 0.13 & 4.51 \\
+ln(Efficiency) & -0.02*** & 0.00 & -7.28 & -0.01*** & 0.00 & -9.94 & -0.00 & 0.00 & -0.89 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2202} &\multicolumn{3}{c}{2202}& \multicolumn{3}{c}{3898} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.13} &\multicolumn{3}{c}{0.19}& \multicolumn{3}{c}{-3.07} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.13} &\multicolumn{3}{c}{0.04}& \multicolumn{3}{c}{-1.18} \\
+F-statistic/Wald test& \multicolumn{3}{c}{68.05} &\multicolumn{3}{c}{87.31}& \multicolumn{3}{c}{402453.6} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\vspace{0.4cm}
+
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{Cost of Equity}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & 0.31*** & 0.05 & 5.77 & 0.26*** & 0.05 & 4.74& 0.21*** & 0.06 & 3.35 \\
+$E^2$ & -0.26*** & 0.07 & -3.32 & -0.12 & 0.12 & -1.02 & -0.16* & 0.09 & -1.84 \\
+Lagged & & & & & & & -0.25*** & 0.03 & -8.23 \\
+Capitalization & 1.14*** & 0.17 & 6.50 & 2.40*** & 0.33 & 7.15  & 0.76*** & 0.27 & 2.74 \\
+Liquidity & 0.34*** & 0.06 & 5.46 & 0.69*** & 0.14 & 4.90 & 0.09** & 0.04 & 2.22 \\
+ln(Efficiency) & 0.06*** & 0.00 & 9.33 & 0.14*** & 0.01 & 13.34 & 0.03*** & 0.01 & 3.25 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2203} &\multicolumn{3}{c}{2203}& \multicolumn{3}{c}{3902} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.06} &\multicolumn{3}{c}{0.12}& \multicolumn{3}{c}{-11.29} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.06} &\multicolumn{3}{c}{-0.03}& \multicolumn{3}{c}{-11.36} \\
+F-statistic/Wald test& \multicolumn{3}{c}{31.75} &\multicolumn{3}{c}{52.04}& \multicolumn{3}{c}{1283.43} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+\end{landscape}
+
+\newpage
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{log(Cost of Debt)}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & -3.53*** &0.45&-7.71 & -3.54*** &0.44&-8.05 & -3.99*** &0.70&-5.65 \\
+$E^2$ & 4.31*** & 0.66 & 6.46 & 4.38*** &0.81& 5.36 & 4.10*** &1.23& 3.31 \\
+Lagged & & & & & & & 0.26** & 0.11 & 2.39 \\
+Capitalization & 10.11*** & 1.50 & 6.74 & 16.38*** & 2.05 & 7.96 & -4.88** & 2.10 & -2.32 \\
+Liquidity & 8.79*** &0.53&16.42 & 13.26*** & 0.83 & 15.80 & -0.99** & 0.40 & -2.45 \\
+ln(Efficiency) & 0.44*** & 0.06 & 6.76 & 0.47*** & 0.06 & 7.17 & 0.20* & 0.11 & 1.88 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{1990} &\multicolumn{3}{c}{1990}& \multicolumn{3}{c}{3355} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.16} &\multicolumn{3}{c}{0.18}& \multicolumn{3}{c}{-4.28} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.15} &\multicolumn{3}{c}{0.02}& \multicolumn{3}{c}{-0.03} \\
+F-statistic/Wald test& \multicolumn{3}{c}{76.71} &\multicolumn{3}{c}{76.37}& \multicolumn{3}{c}{962.31} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\vspace{0.4cm}
+
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{log(Net Income)}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & 2.29*** & 0.69 & 3.27 & -2.13*** & 0.17 & -12.40 & -0.04 & 0.25 & -0.18 \\
+$E^2$ & 4.27*** & 1.26 & 3.36 & 2.96*** & 0.41 & 7.17 & 1.60** & 0.65 & 2.45 \\
+Lagged & & & & & & & 0.81*** & 0.02 & 27.14 \\
+Capitalization & 2.37 & 2.21 & 1.06 & -3.94 & 0.82 & -4.78  & 4.18 & 0.70 & 5.96 \\
+Liquidity & -3.28*** & 0.78 & -4.15 & 0.81*** & 0.31 & 2.60 & 1.03*** & 0.13 & 7.40 \\
+ln(Efficiency) & -0.96*** & 0.06 & -14.20 & -0.61*** & 0.02 & -28.09 & -0.39*** & 0.03 & -10.03 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{1975} &\multicolumn{3}{c}{1975}& \multicolumn{3}{c}{3414} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.51} &\multicolumn{3}{c}{0.58}& \multicolumn{3}{c}{-8.15} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.51} &\multicolumn{3}{c}{0.50}& \multicolumn{3}{c}{-1.03} \\
+F-statistic/Wald test& \multicolumn{3}{c}{413.40} &\multicolumn{3}{c}{469.59}& \multicolumn{3}{c}{44510.46} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+\end{landscape}
+
+\newpage
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{Net Interest Margin}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & 0.52* & 0.28 & 1.84 & 0.66*** & 0.13 & 4.81 & 0.30*** & 0.11 & 2.62 \\
+$E^2$ & -1.88*** & 0.57 & -3.29 & -0.90*** & 0.23 & -3.82 & -0.42** & 0.18 & -2.25 \\
+Lagged & & & & & & & 0.92*** & 0.05 & 17.63 \\
+Capitalization & 9.15*** & 1.12 & 8.10 & 9.13*** & 1.00 & 9.06 & 0.85*** & 0.62 & 1.37 \\
+Liquidity & 3.03*** & 0.52 & 5.75 & -1.18*** & 0.36 & -3.23 & 0.32** & 0.16 & 2.01 \\
+ln(Efficiency) & -0.06* & 0.03 & -1.71 & -0.13*** & 0.02 & -5.61 & -0.13*** & 0.02 & -5.91 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2199} &\multicolumn{3}{c}{2199}& \multicolumn{3}{c}{3895} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.24} &\multicolumn{3}{c}{0.19}& \multicolumn{3}{c}{-3.88} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.24} &\multicolumn{3}{c}{0.04}& \multicolumn{3}{c}{-7.04} \\
+F-statistic/Wald test& \multicolumn{3}{c}{140.89} &\multicolumn{3}{c}{89.49}& \multicolumn{3}{c}{141184.2} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\vspace{0.4cm}
+
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.3]cc@{}S[table-format = 1.3]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{Market Share}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & -0.04* & 0.02 & -1.70 & -0.002*** & 0.000 & -2.94 & -0.001*** & 0.003 & -4.58 \\
+$E^2$ & 0.16** & 0.07 & 2.31 & 0.006*** & 0.002 & 2.68 & 0.008*** & 0.01 & 6.60 \\
+Lagged & & & & & & & 0.009*** & 0.005 & 163.94 \\
+Capitalization & -0.06&0.05&-1.24 & -0.004&0.003&-1.19  & 0.001* & 0.005 &1.73 \\
+Liquidity & -0.06 &0.03&-1.64 & -0.001 &0.003&-0.31 & -0.00 & 0.00 & -0.26 \\
+ln(Efficiency) & -0.002&0.001&-1.56 & -0.0003&0.000&-0.90 & -0.00* & 0.00 & 1.67 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2203} &\multicolumn{3}{c}{2203}& \multicolumn{3}{c}{3902} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.43} &\multicolumn{3}{c}{0.01}& \multicolumn{3}{c}{-1.68} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.43} &\multicolumn{3}{c}{-0.17}& \multicolumn{3}{c}{-0.72} \\
+F-statistic/Wald test& \multicolumn{3}{c}{338.57} &\multicolumn{3}{c}{3.82}& \multicolumn{3}{c}{69499.64} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{0.0018}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+\end{landscape}
+
+\newpage
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{Idio. Risk}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & -1.81*** & 0.21 & -8.46 & -1.88*** & 0.24 & -7.82 & -1.68*** & 0.28 & -5.86 \\
+$E^2$ & 1.72*** & 0.35 & 4.87 & 2.53*** & 0.60 & 4.20 & 1.57*** & 0.46 & 3.39 \\
+Lagged & & & & & & & -0.01 & 0.02 & -0.59 \\
+Capitalization & -2.87*** & 1.05 & -2.73 & -3.80*** & 1.34 & -2.82 & -2.32** & 0.94 & -2.46 \\
+Liquidity & 2.20*** & 0.51 & 4.27 & 4.52*** & 0.63 & 7.11 & 2.09*** & 0.16 & 12.36 \\
+ln(Efficiency) & 0.28*** & 0.03 & 9.31 & 0.44*** & 0.04 & 9.28 & 0.40*** & 0.05 & 8.05 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2203} &\multicolumn{3}{c}{2203}& \multicolumn{3}{c}{3902} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.15} &\multicolumn{3}{c}{0.13}& \multicolumn{3}{c}{-10.13} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.14} &\multicolumn{3}{c}{-0.02}& \multicolumn{3}{c}{-8.47} \\
+F-statistic/Wald test& \multicolumn{3}{c}{78.00} &\multicolumn{3}{c}{55.89}& \multicolumn{3}{c}{5112.13} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\vspace{0.4cm}
+
+\scalebox{1}{
+\begin{tabular}{l@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc@{}S[table-format = 1.2]cc}
+\toprule
+\multicolumn{1}{c}{\textbf{Beta}} & \multicolumn{3}{c}{\textbf{Pooled OLS}} & \multicolumn{3}{c}{\textbf{Fixed Effects}} & \multicolumn{3}{c}{\textbf{GMM}} \\
+\cline{2-10}
+\multicolumn{1}{c}{\textbf{Independent Variables}} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{t-Stat} & \multicolumn{1}{c}{\textbf{Coefficient}} & \textbf{SE} & \textbf{z-Stat} \\
+\toprule
+$E$ & 2.14*** & 0.13 & 15.81 & 1.48*** & 0.14 & 10.42 & 2.28*** & 0.20 & 11.26 \\
+$E^2$ & -2.02*** & 0.20 & -9.79 & -1.11*** & 0.24 & -4.61 & -2.04*** & 0.30 & -6.76 \\
+Lagged & & & & & & & -0.07** & 0.03 & -2.08 \\
+Capitalization & 2.15*** & 0.61 & 3.49 & 2.04*** & 2.88 & 3.49 & 3.06*** & 0.94 & 3.23 \\
+Liquidity & 0.38** & 0.17 & 2.17 & 0.42 & 0.26 & 1.61 & 0.44*** & 0.14 & 3.00 \\
+ln(Efficiency) & 0.05*** & 0.02 & 2.76 & 0.24*** & 0.02 & 10.68 & 0.10*** & 0.03 & 3.39 \\
+\hline
+Individual Effects & \multicolumn{3}{c}{No} &\multicolumn{3}{c}{Yes}& \multicolumn{3}{c}{Yes} \\
+Observations & \multicolumn{3}{c}{2203} &\multicolumn{3}{c}{2203}& \multicolumn{3}{c}{3902} \\
+R-squared/AR(1) & \multicolumn{3}{c}{0.17} &\multicolumn{3}{c}{0.16}& \multicolumn{3}{c}{-7.47} \\
+Adjusted R-squared/AR(2) & \multicolumn{3}{c}{0.17} &\multicolumn{3}{c}{0.00}& \multicolumn{3}{c}{-9.95} \\
+F-statistic/Wald test& \multicolumn{3}{c}{93.38} &\multicolumn{3}{c}{72.59}& \multicolumn{3}{c}{1942.36} \\
+p-value & \multicolumn{3}{c}{$<2.22\times10^{-16}$} &\multicolumn{3}{c}{$<2.22\times10^{-16}$}&\multicolumn{3}{c}{$<2.22\times10^{-16}$} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+\end{landscape}
+
+
+
+
+
+\newpage
+\section{Discussion and Conclusion}
+The results of the relationships between the indicators of environmental sustainability and several performance metrics indicate complex and nuanced relationships for US banks. The research applied a robust quantitative approach, taking estimation with methodologies of pooled OLS, fixed effects, and GMM. A negative result was found for the environmental sustainability effect with both ROA and ROE but a positive effect with the Tobin's Q measure of market valuation. 
+
+Both environmental sustainability coefficients for ROA and ROE are negative across all models, signifying the inverse relationship between environmental scores and profitability. These findings align with previous studies of \cite{Wu2013} and \cite{Khan2023a}, in which they observed that as the spending on environmental activities increases, so does an increase in operational costs, and hence these will reduce short-term profitability. However, these are costs that in the long-term could be balanced out by benefits, which is an element the current research finds evidence for through the positive relationship with Tobin's Q. 
+
+Tobin’s Q results illustrate that higher environmental scores are associated with higher market valuations, suggesting that investors reward banks with superior environmental practices. This provides further evidence of the findings by \cite{Scholtens2009}, who found that banks with excellent sustainability profiles receive valuation premiums due to the perceived lower long-term risks and alignment with societal values.  
+
+An analysis of channel variables offers a new perspective on the understanding of these relationships. The valuation channel reveals that while environmental sustainability is associated with a lower cost of debt, it is linked to a higher cost of equity. The indicated nonlinear relationship, from the significant coefficient of E\textsuperscript{2} in both the cost of equity and cost of debt models, emphasizes the diminishing returns of environmental investments at higher levels and confirms findings by \cite{Goss2011}, who observed similar patterns in the banking sector. 
+
+The analysis of the cash flow channel presents mixed effects. Net income shows conflicting results across different models, while the net interest margin consistently exhibits a positive relationship with environmental sustainability, which means that environmentally sustainable banks might have a higher pricing power and therefore higher customer loyalty. The negative coefficient in the market share model aligns with the findings of \cite{Bussoli2018}, who observed that banks implementing superior environmental practices might encounter reluctance from certain market segments. Additionally, \cite{Kwon2019} suggest that operational efficiency gains from sustainability can enhance market valuation but do not necessarily translate to increased market share due to competitive dynamics. 
+
+The risk channel analysis provides insights into the risk profile of banks correlated with environmental sustainability. The negative coefficient with idiosyncratic risk suggests that environmentally sustainable initiatives reduce firm-specific risks, which is in line with the findings by \cite{Bouslah2013}, who argued that such banks benefited from higher operational efficiencies and better stakeholder relations. However, the positive relationship with systematic risk (Beta) suggests that those firms may be more sensitive to market-wide shocks, aligning with the argument that sustainable firms are more exposed to regulatory and market sentiment shifts related to environmental issues. 
+
+This study contributes to the growing body of literature on the intersection of environmental sustainability and financial performance in the banking sector. By providing empirical evidence on the financial implications of sustainability in the banking sector, this study offers valuable insights for policymakers, industry practitioners, and researchers. Policymakers can use these findings to design regulations that effectively promote sustainable banking practices, while industry practitioners can develop strategies that align with both financial and environmental goals. Researchers are encouraged to build on this work by exploring these relationships in different contexts and over longer time horizons.
+
+In conclusion, the integration of environmental sustainability into banking practices not only supports the broader goal of sustainable economic growth but also offers tangible financial benefits. As shown by the results, although environmental sustainability negatively impacts short-term profitability, it improves market valuation and reduces idiosyncratic risk. Hence, it is beneficial in a long-term perspective. This study also emphasizes the significance of considering firm-specific characteristics and endogeneity when evaluating the impact of environmental sustainability. Future research should explore these dynamics in a global context, considering the varying regulatory and market conditions. Moreover, longitudinal studies that track the long-term impacts of sustainability initiatives on financial performance would provide deeper insights into the benefits and challenges of integrating environmental considerations into banking practices. 
+
+\newpage
+\appendix
+\section{Data Availability}
+The dataset supporting the conclusions of this dissertation as well as the R source code to reproduce the results are available in the GitHub repository at https://github.com/JinglinTang/Environmental-Sustainability-and-Financial-Performance/.
+
+\newpage
+
+\bibliographystyle{agsm}
+\bibliography{export}
+%\printbibliography
+
+\end{document}
